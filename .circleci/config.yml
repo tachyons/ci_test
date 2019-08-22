@@ -16,8 +16,10 @@ jobs:
           name: Install cqlsh via pip3
           command: |
             sudo apt install python-pip
-            sudo pip install cqlsh==4.1.1
+            sudo pip install cqlsh
             cqlsh --version
+            touch a.cql
+            cqlsh --cqlversion=3.4.4 -f a.cql
 
 workflows:
   test:
