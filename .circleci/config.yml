@@ -1,16 +1,22 @@
-version: 2
+version: 2.1
 jobs:
-  build:
-    working_directory: ~/your-app-name
+  buil:
     docker:
-      - image: circleci/ruby:2.4.1
-     environment:
-       RAILS_ENV: test
-  steps:
+      - image: circleci/node:8.9.4
+      - image: rabbitmq:latest
+    steps:
       - checkout
-      
-      # Setup the environment
-    - run: cp .sample.env .env
+  integration-test:
+    docker:
+      - image: circleci/node:8.9.4
+      - image: cassandra:3.11
+    steps:
+      - checkout
+      - run:
+          name: Start CassandraDB
+          command: dockerize -wait tcp://localhost:9042 -timeout 1m
 
-      # Run the tests
-    - run: bundle exec rake
+workflows:
+  test:
+    jobs:
+      - build
