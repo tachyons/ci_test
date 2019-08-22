@@ -1,12 +1,6 @@
 version: 2.1
 jobs:
-  buil:
-    docker:
-      - image: circleci/node:8.9.4
-      - image: rabbitmq:latest
-    steps:
-      - checkout
-  integration-test:
+  build:
     docker:
       - image: circleci/node:8.9.4
       - image: cassandra:3.11
