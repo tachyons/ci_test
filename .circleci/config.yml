@@ -13,7 +13,7 @@ jobs:
           name: Start CassandraDB
           command: dockerize -wait tcp://localhost:9042 -timeout 1m
       - run:
-          name: Install cqlsh via pip
+          name: Install cqlsh via pip3
           command: |
             sudo apt install python3-pip
             pip3 install cqlsh==4.1.1
